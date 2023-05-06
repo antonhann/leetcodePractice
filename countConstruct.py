@@ -11,15 +11,18 @@
 # print(countConstruct("purple", ['purp','p','ur','le', 'purpl']))
 # print(countConstruct("skateboard", ['bo','rd','ate','t','ska','sk','boar']))
 # print(countConstruct("eeeeeeeeeeeeeeeeeeeeeeeeeeeeef", ['e','ee','eee','eee','eeee','eeeeee','eeeeee','eeeeee','eeeee','eeeee']))
-def countConstruct(target,words):
+def countConstruct(target,words, memo = {}):
     if target == "":
         return 1
+    if target in memo:
+        return memo[target]
     res = 0
     for i in words:
         rem = target[:len(i)]
         if i == rem:
             res += countConstruct(target[len(i):],words)
-    return res
+    memo[target] = res
+    return memo[target]
 
 print(countConstruct("purple", ['purp','p','ur','le', 'purpl']))
 print(countConstruct("skateboard", ['bo','rd','ate','t','ska','sk','boar']))
